@@ -1,0 +1,4 @@
+Client ID
+8d93a59cd57455e0dfd9
+
+client secret fe26b64d479e1f9807ce426194ae65274e2e785c
