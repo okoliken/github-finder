@@ -4,13 +4,13 @@
       <div class="col-md-7 position-relative">
         <Input v-model="searchedUser" />
         <span class="search-btn" @click="getGitHubUsers">
-          <i class="fas fa-search bg-secondary"></i>
+         <img src="../assets/loupe.png" alt="">
         </span>
       </div>
     </div>
 
     <div class="row my-4">
-      <div v-if="isLoading" class="my-4 text-center">Loading....</div>
+      <div v-if="isLoading" class="my-4 text-center"><LoadingGif /></div>
       <GitUser
         v-else
         v-for="user in users"
@@ -25,9 +25,10 @@
 <script>
 import GitUser from "./gitusers/GitUser.vue";
 import Input from "../components/Input.vue";
+import LoadingGif from "../components/LoadingGif.vue";
 
 export default {
-  components: { GitUser, Input },
+  components: { GitUser, Input, LoadingGif },
   data() {
     return {
       users: [],
@@ -66,9 +67,9 @@ export default {
 }
 
 .input-container .search-btn {
-  padding: 1.6rem 1.75rem;
+  padding: .6rem 1.75rem;
   background-color: #212529;
-   box-shadow: 8px 10px 15px #f4f4f4;
+  box-shadow: 8px 10px 15px #f4f4f4;
   position: absolute;
   right: 0;
   top: 0;
@@ -89,7 +90,10 @@ export default {
 .input-container input::placeholder {
   color: #212529;
 }
-
+.input-container img{
+  color: #f4f4f4;
+  width:30px;
+}
 @keyframes fade-in {
   from {
     opacity: 0;
