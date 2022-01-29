@@ -63,7 +63,6 @@
 </template>
 
 <script>
-import LoadingGif from "../../components/LoadingGif.vue";
 import DetailsSkeletonVue from "../../components/userDetailsSkeleton/DetailsSkeleton.vue";
 
 export default {
@@ -71,7 +70,7 @@ export default {
     id: String,
     name: String,
   },
-  components: { LoadingGif, DetailsSkeletonVue },
+  components: { DetailsSkeletonVue },
   data() {
     return {
       userInfo: {},
