@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
+    <div class="container-fluid">
       <router-link class="navbar-brand" to="/">Github Finder</router-link>
       <button
         class="navbar-toggler"

@@ -1,35 +1,53 @@
 <template>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </div>
+  <div class="back-drop">
+    <div class="card p-5">
+      <h4 class="lead">
+        Please fill in the
+        <span class="text-danger">Input</span> with a user's name from Github
+      </h4>
+      <span class="close" @click="$emit('close', false)">X</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-
-}
+  name: "Modal",
+};
 </script>
 
-<style>
-
+<style scoped>
+.card {
+  width: 18rem;
+  position: relative;
+}
+.back-drop {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+}
+.close {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  color: #c20d0d;
+  height: 30px;
+  top: 0;
+  transform: translateX(12px) translateY(-18px);
+  right: 0;
+  position: absolute;
+  border-radius: 50%;
+}
+.close:hover {
+  background-color: rgb(236, 231, 231);
+  cursor: pointer;
+}
 </style>

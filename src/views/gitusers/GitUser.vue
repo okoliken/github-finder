@@ -12,7 +12,7 @@
           <div>
             <img :src="user.avatar_url" alt="" class="img-fluid" />
           </div>
-          <div class="card-body ml-2">
+          <div class="card-body text-start ml-2">
             <h5 class="card-title">
               {{ user.login }}
             </h5>

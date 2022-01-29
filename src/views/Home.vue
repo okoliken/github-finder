@@ -1,16 +1,20 @@
 <template>
-  <div class="home container">
+  <div class="home container-fluid">
     <div class="mt-5 input-container row">
       <div class="col-md-7 position-relative">
-        <Input v-model="searchedUser" />
-        <span class="search-btn" @click="getGitHubUsers">
-         <img src="../assets/loupe.png" alt="">
-        </span>
+        <Input v-model="searchedUser" @keypress.enter="getGithubUsers" />
+        <img
+          src="../assets/loupe.png"
+          alt="not found"
+          @click="getGithubUsers"
+        />
       </div>
     </div>
 
     <div class="row my-4">
-      <div v-if="isLoading" class="my-4 text-center"><LoadingGif /></div>
+      <div v-if="isLoading" class="row">
+        <SkeletonVue v-for="i in 30" :key="i" class="fadein" />
+      </div>
       <GitUser
         v-else
         v-for="user in users"
@@ -19,28 +23,30 @@
         class="fadein"
       />
     </div>
+    <ModalVue @close="closeModal" v-if="isEmpty === true" />
   </div>
 </template>
-
 <script>
 import GitUser from "./gitusers/GitUser.vue";
 import Input from "../components/Input.vue";
-import LoadingGif from "../components/LoadingGif.vue";
+import SkeletonVue from "../components/Skeleton.vue";
+import ModalVue from "../components/Modal.vue";
 
 export default {
-  components: { GitUser, Input, LoadingGif },
+  components: { GitUser, Input, SkeletonVue, ModalVue },
   data() {
     return {
       users: [],
       searchedUser: "",
       isLoading: false,
+      isEmpty: false,
     };
   },
   methods: {
-    async getGitHubUsers() {
+    async getGithubUsers() {
       try {
         if (this.searchedUser.length === 0) {
-          alert("please enter a value in the input field");
+          this.isEmpty = true;
           return;
         }
         this.isLoading = true;
@@ -54,8 +60,12 @@ export default {
         this.isLoading = false;
         this.users = data.items;
       } catch (e) {
+        this.searchedUser = "";
         console.log("failed to fetch", e);
       }
+    },
+    closeModal(value) {
+      this.isEmpty = value;
     },
   },
 };
@@ -66,33 +76,31 @@ export default {
   animation: fade-in 1s ease;
 }
 
-.input-container .search-btn {
-  padding: .6rem 1.75rem;
-  background-color: #212529;
-  box-shadow: 8px 10px 15px #f4f4f4;
+.input-container img {
   position: absolute;
   right: 0;
   top: 0;
-  transform: translateY(2px) translateX(-15px);
+  transform: translateY(12px) translateX(-50px);
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
 }
 .input-container input {
   border: none;
+  appearance: none;
   box-shadow: 8px 10px 15px #f4f4f4;
   padding: 15px;
   color: #212529;
 }
 
-.input-container .search-btn:hover {
+.input-container img:hover {
   cursor: pointer;
 }
 .input-container input::placeholder {
   color: #212529;
 }
-.input-container img{
+.input-container img {
   color: #f4f4f4;
-  width:30px;
+  width: 30px;
 }
 @keyframes fade-in {
   from {
