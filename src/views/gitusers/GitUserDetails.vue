@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-if="isloading" class="text-center my-5"><LoadingGif /></div>
+    <div v-if="isloading" class="text-center my-5"><DetailsSkeletonVue /></div>
     <div v-else class="row align-items-center my-5" style="margin-top: 120px">
       <div class="col-md-6">
         <div class="card p-2">
@@ -64,13 +64,14 @@
 
 <script>
 import LoadingGif from "../../components/LoadingGif.vue";
+import DetailsSkeletonVue from "../../components/userDetailsSkeleton/DetailsSkeleton.vue";
 
 export default {
   props: {
     id: String,
     name: String,
   },
-  components: { LoadingGif },
+  components: { LoadingGif, DetailsSkeletonVue },
   data() {
     return {
       userInfo: {},
